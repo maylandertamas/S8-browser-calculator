@@ -8,7 +8,7 @@ function main () {
       operationString += keyValue;
     });
   
-  $(".keys .operator").one('click', function() {
+  $(".keys .operator").on('click', function() {
     if (operationString.length !== 0) {
       var operatorValue = $(this).text();
       $(".screen").append(operatorValue);
