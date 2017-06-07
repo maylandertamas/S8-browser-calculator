@@ -38,6 +38,11 @@ function main () {
         operationString = "";
 
     });
+    $(".keys .decimal").on('click', function() {
+        var decimalValue = $(this).text();
+        $(".screen").append(decimalValue);
+        operationString += decimalValue;
+      });
  
 }
 $(document).ready(main);
