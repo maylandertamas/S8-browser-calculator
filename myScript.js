@@ -1,68 +1,35 @@
-/* function main () {
-  $('.keys').hide()
-  $('.keys').fadeIn(1000)
-
-} */
 function main () {
-  var num1 = "";
-  var num_array = [];
-  var final = 0;
-  var operator = "";
-  alert(3-2);
+
+    var operationString = ""
   $(".keys .numButton").on('click', function() {
-      var value = $(this).text();
-      $( ".screen" ).append(value);
-      num_array.push(parseFloat(value));
-      value = ""
-      });
-      $(".keys .operator").on('click', function() {
-      $( ".screen" ).empty();
-      alert($(".keys .operators").text());
-       switch ($(".keys .operators").text()) {
-        case "-":
-          num_array[3] = num_array[0] - num_array[1];
-          alert(num_array);
-          final += num_array[3]
-          num_array.splice(0, 3);
-          break;
-        case "+":
-          num_array[3] = num_array[0] + num_array[1];
-          final += num_array[3]
-          num_array.splice(0, 1);
-          break;
-        case "X":
-          num_array[3] = num_array[0] * num_array[1];
-          final += num_array[3]
-          num_array.splice(0, 1);
-          break;
-        case "÷":
-          num_array[3] = num_array[0] / num_array[1];
-          final += num_array[3]
-          num_array.splice(0, 1);
-          break;
-        }
-      });
+    var keyValue = $(this).text();
+      $(".screen").append(keyValue);
+      operationString += keyValue;
+    });
+  $(".keys .operator").on('click', function() {
+    if (operationString.length > 0) {
+      alert(operationString.length);
+    var operatorValue = $(this).text();
+      $(".screen").append(operatorValue);
+      operationString += operatorValue;
+      }
+    });
       $(".keys .eval").on('click', function() {
-      $( ".screen" ).append(final)
-      final = 0
-           });
-      $(".keys .clear").on('click', function() {
-        $( ".screen" ).empty()
-        });
-      
-  
-  
-  
-          
-          
-          /*
-          
-  } */ 
+        if(operationString !== "" || operationString !== undefined) {
+          var replacedDivide = operationString.replace(/÷/g, "/");
+          var replacedMultiply = replacedDivide.replace(/x/g, "*");
+          var evaledString = eval(replacedMultiply);
+          $(".screen").empty();
+          $(".screen").append(evaledString);
+          operationString = evaledString;
+        }
+    });
 
+      $(".top .clear").on('click', function() {
+        $(".screen").empty();
+        operationString = "";
 
-/* tárolja a számokat stringként, aztán átváltani számmá akkor ha operatorra klikkel
-   ezután másik számot is ugyanúgy majd ha az egyenlőségre kattint akkor kettőt osztani az operatortól függően
-   amit szintén kimenteni egy varablebe */
+    });
  
 }
 $(document).ready(main);
