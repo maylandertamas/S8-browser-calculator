@@ -9,40 +9,55 @@ function main () {
     });
   
   $(".keys .operator").on('click', function() {
-    if (operationString.length !== 0) {
-      var operatorValue = $(this).text();
-      $(".screen").append(operatorValue);
-      operationString += operatorValue;
+    try {
+      if (operationString.length === 0) {
+        throw "Missing number"
+      } else {
+          var operatorValue = $(this).text();
+          $(".screen").append(operatorValue);
+          operationString += operatorValue;
+      }
     }
-    });
-
-      $(".keys .eval").on('click', function() {
-        try {
-          var isnum = /^\d+$/.test(operationString)
-          if (isnum === true) throw "Missing operator";
-          if(operationString === "" || operationString === undefined) throw "Missing input";
-        }
-        catch(err) {
+    catch(err) {
           alert(err)
-        }
-          var replacedDivide = operationString.replace(/÷/g, "/");
-          var replacedMultiply = replacedDivide.replace(/x/g, "*");
-          var evaledString = eval(replacedMultiply);
           $(".screen").empty();
-          $(".screen").append(evaledString);
-          operationString = evaledString;
-    });
+          operationString = "";
+    }
+  });
 
-      $(".top .clear").on('click', function() {
+  $(".keys .eval").on('click', function() {
+    try {
+      var isnum = /^\d+$/.test(operationString)
+      if (isnum === true) {
+        throw "Missing operator"
+      } else if(operationString === "" || operationString === undefined) {
+        throw "Missing input"
+      } else {
+        var replacedDivide = operationString.replace(/÷/g, "/");
+        var replacedMultiply = replacedDivide.replace(/x/g, "*");
+        var evaledString = eval(replacedMultiply);
         $(".screen").empty();
-        operationString = "";
+        $(".screen").append(evaledString);
+        operationString = evaledString;
+      }
+    }
+    catch(err) {
+      alert(err)
+      $(".screen").empty();
+      operationString = "";
+    }
+  });
 
-    });
-    $(".keys .decimal").on('click', function() {
-        var decimalValue = $(this).text();
-        $(".screen").append(decimalValue);
-        operationString += decimalValue;
-      });
+  $(".top .clear").on('click', function() {
+    $(".screen").empty();
+    operationString = "";
+  });
+
+  $(".keys .decimal").on('click', function() {
+      var decimalValue = $(this).text();
+      $(".screen").append(decimalValue);
+      operationString += decimalValue;
+  });
  
 }
 $(document).ready(main);
