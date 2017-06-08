@@ -20,8 +20,6 @@ function main () {
     }
     catch(err) {
           alert(err)
-          $(".screen").empty();
-          operationString = "";
     }
   });
 
@@ -41,13 +39,13 @@ function main () {
         var evaledString = eval(replacedMultiply);
         $(".screen").empty();
         $(".screen").append(evaledString);
-        operationString = evaledString;
+        operationString = evaledString.toString();
       }
     }
     catch(err) {
       alert(err)
-      $(".screen").empty();
-      operationString = "";
+      
+
     }
   });
 
@@ -57,9 +55,23 @@ function main () {
   });
 
   $(".keys .decimal").on('click', function() {
-      var decimalValue = $(this).text();
-      $(".screen").append(decimalValue);
-      operationString += decimalValue;
+      try {
+        var isNumEnd = /^\d+$/.test(operationString.slice(-1))
+        if (operationString.slice(-1) === ".") {
+          throw "You can't use decimal notation after another";
+        } else if (operationString.length === 0) {
+          throw "Missing number";
+        } else if (isNumEnd === false) {
+          throw "Can't use decimal notation after an operator";
+        } else {
+          var decimalValue = $(this).text();
+          $(".screen").append(decimalValue);
+          operationString += decimalValue;
+        }
+      }
+      catch(err) {
+        alert(err)
+      }
   });
  
 }
