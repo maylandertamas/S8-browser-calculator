@@ -1,16 +1,15 @@
 function alertbox (errorMessage) {
     $(document).ready(function(){
+      $(".error-box").removeAttr('style');
         $(".error-box").fadeIn(400);
-          $( ".error-box" ).text(errorMessage);
+          $( "#error-message" ).text(errorMessage);
           $(".error-box").animate({
-            bottom: '250px',
+            bottom: '555px',
             opacity: '1',
-            height: '150px',
-            width: '150px'
-    }, function () {
-      $(this).css({'left':'0','opacity':'1'});
+            height: '80px',
+            width: '280px'
     });
-    $(".error-box").delay(500).fadeOut(400);
+    $(".error-box").delay(1200).fadeOut(1000);
     });
 }
 
@@ -62,7 +61,7 @@ function main () {
       }
     }
     catch(err) {
-      alert(err)
+      alertbox(err)
     }
 });
 
@@ -87,7 +86,7 @@ function main () {
         }
       }
       catch(err) {
-        alert(err)
+        alertbox(err)
       }
   });
  
