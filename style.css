@@ -143,3 +143,11 @@ html {
 	top: 4px;
 	box-shadow: 0px 0px #d3545d;
 }
+
+.error-box {
+	background:#98bf21;
+	height:100px;
+	width:100px;
+	position:absolute;
+	border-radius: 10px;
+}
