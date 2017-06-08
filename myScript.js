@@ -3,25 +3,26 @@ function alertbox (errorMessage) {
       $(".error-box").removeAttr('style');
         $(".error-box").fadeIn(400);
           $( "#error-message" ).text(errorMessage);
+          
           $(".error-box").animate({
             bottom: '555px',
             opacity: '1',
             height: '80px',
             width: '280px'
-    });
+          });
     $(".error-box").delay(1200).fadeOut(1000);
     });
 }
 
 function main () {
 
-    var operationString = ""
+  var operationString = ""
 
   $(".keys .numButton").on('click', function() {
     var keyValue = $(this).text();
       $(".screen").append(keyValue);
       operationString += keyValue;
-    });
+  });
   
   $(".keys .operator").on('click', function() {
     try {
@@ -31,9 +32,9 @@ function main () {
       } else if (isNumEndOperator === false) { 
         throw "Can't insert operators next to each other"
       } else {
-          var operatorValue = $(this).text();
-          $(".screen").append(operatorValue);
-          operationString += operatorValue;
+        var operatorValue = $(this).text();
+        $(".screen").append(operatorValue);
+        operationString += operatorValue;
       }
     }
     catch(err) {
@@ -45,6 +46,7 @@ function main () {
     try {
       var isNumEndEval = /^\d+$/.test(operationString.slice(-1))
       var isNumWholeEval = /^\d+$/.test(operationString)
+
       if (isNumWholeEval === true) {
         throw "Missing operator"
       } else if(operationString === "" || operationString === undefined) {
@@ -63,7 +65,7 @@ function main () {
     catch(err) {
       alertbox(err)
     }
-});
+  });
 
   $(".top .clear").on('click', function() {
     $(".screen").empty();
